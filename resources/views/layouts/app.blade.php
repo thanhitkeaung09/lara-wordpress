@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
+{{--        <script src="{{ asset('js/app.js') }}"></script>--}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,7 +19,8 @@
     <!-- Styles -->
 {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css','resources/js/app.js'])
+
 </head>
 <body>
     <div id="app">
@@ -96,6 +97,17 @@
                 @endguest
         </main>
     </div>
-@stack('script')
+
+
+  @stack('scripts')
+
+    @if(session('status'))
+        <script type="module">
+            run("{{session('status')}}")
+        </script>
+    @endif
+
+
+
 </body>
 </html>

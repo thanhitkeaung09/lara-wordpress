@@ -12,6 +12,10 @@
             <div class="">
                 <p class="mb-0">This is home</p>
             </div>
+
+            <div class="">
+                {{\Illuminate\Support\Facades\Auth::user()}}
+            </div>
         </div>
     </div>
 @endsection

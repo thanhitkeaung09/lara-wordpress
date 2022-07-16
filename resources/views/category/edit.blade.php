@@ -4,21 +4,23 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
             <li class="breadcrumb-item active">Category</li>
-            <li class="breadcrumb-item active" aria-current="page">Create Category</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Category</li>
         </ol>
     </nav>
 
     <div class="card">
         <div class="card-body">
-            <h4>Create Category</h4>
+            <h4>Edit Category</h4>
             <hr>
             <div class="">
-                <form action="{{route('category.store')}}" method="post">
+                <form action="{{route('category.update',$category->id)}}" method="post">
                     @csrf
+                    @method('put')
                     <div class="row">
                         <div class="col">
                             <input type="text"
                                    name="title"
+                                   value="{{old('title',$category->title)}}"
                                    class="form-control
                                     @error('title') is-invalid @enderror">
                             @error('title')
@@ -29,7 +31,7 @@
                         </div>
 
                         <div class="col">
-                            <button class="btn btn-primary">Add Category</button>
+                            <button class="btn btn-primary">Update Category</button>
                         </div>
                     </div>
                 </form>

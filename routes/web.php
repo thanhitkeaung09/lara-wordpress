@@ -25,4 +25,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/test',[\App\Http\Controllers\HomeController::class, 'test'])->name('test');
 
 Route::resource('/post',PostController::class);
-Route::resource("/category",CategoryController::class);
+Route::resource("/category",CategoryController::class)->middleware('testing:5');

@@ -27,18 +27,10 @@ class DatabaseSeeder extends Seeder
          ]);
 
 
-        $categories = ["IT News","Sport","Food & Drink","Travel"];
-        foreach ($categories as $category) {
-            Category::factory()->create([
-               'title'=>$category,
-               'slug' => Str::slug($category),
-                'user_id'=> User::inRandomOrder()->first()->id
-//            'user_id'=>User::all()->random()->id
-            ]);
-        }
-
-        Post::factory(250)->create();
-
+         $this->call([
+             CategorySeeder::class,
+             PostSeeder::class
+         ]);
 
     }
 }

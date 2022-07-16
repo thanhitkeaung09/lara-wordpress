@@ -3,21 +3,24 @@ import * as bootstrap from 'bootstrap';
 import Swal from 'sweetalert2'
 
 
-// console.log("hello")
 
-//
-// let showToast = function (){
-//     console.log("this is showToast")
-// }
+window.run = function (message){
+    console.log("I am toast fucking toast")
 
-// function showToast(){
-//     console.log("hello this is showtoast")
-// }
-//
-// window.showToast = function (){
-//     return "This is show Toast"
-// }
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
 
-window.run = function (){
-    alert("I am toast")
+    Toast.fire({
+        icon: 'success',
+        title: message
+    })
 }

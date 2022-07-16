@@ -12,34 +12,55 @@
     <div class="card">
         <div class="card-body">
             <div class="">
-                @if(session('status'))
-                    {{session('status')}}
-                @endif
+                <h4>Category List</h4>
+                <hr>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Control</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
 
-                  @push('script')
-                        <script type="module" src="{{}}">
-                            window.run();
-                        </script>
-                    @endpush
+                    <tbody>
+                     @forelse( $categories as $category )
+                        <tr class="">
+                            <td>{{$category->id}}</td>
+                            <td>
+                                {{ $category->title }} <br>
+                                <span class="badge bg-secondary">{{$category->slug}}</span>
+                            </td>
+                            <td class="">
 
-{{--              @push('script')--}}
-{{--                        <script src="/resources/js/app.js">--}}
-{{--                            @if(session('status'))--}}
-{{--                                {{session('status')}}--}}
-{{--                                console.log(showToast())--}}
-{{--                            @endif--}}
-{{--                        </script>--}}
-{{--                    @endpush--}}
+                                <a href="{{route('category.edit',$category->id)}}" class="btn btn-outline-dark btn-sm">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
 
-{{--                    @push('script')--}}
+                                <form action="{{route('category.destroy',$category->id)}}" class="d-inline-block" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-outline-secondary btn-sm">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
 
-{{--                        <script src="./resources/js/app.js" >--}}
-{{--                        </script>--}}
-
-{{--                    @endpush--}}
-
+                            </td>
+                            <td>
+                                <p class="mb-0 text-black-50"><i class="bi bi-calendar"></i> {{ $category->created_at->format("d m Y") }}</p>
+                                <p class="mb-0 text-black-50"><i class="bi bi-clock"></i>{{ $category->created_at->format("h : m A") }}</p>
+                            </td>
+                        </tr>
+                     @empty
+                         <p>There is no category yet</p>
+                     @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+
+
 
 @endsection
